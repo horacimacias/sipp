@@ -1435,7 +1435,7 @@ void scenario::parseAction(CActions *actions)
             int varId = get_var(currentTabVarName[0], "assign_to");
             tmpAction->setVarId(varId);
 
-            tmpAction->setRegExp(currentRegExp);
+            tmpAction->setMessage(currentRegExp);
             if (currentNbVarNames > 1 ) {
                 sub_currentNbVarId = currentNbVarNames - 1 ;
                 tmpAction->setNbSubVarId(sub_currentNbVarId);

@@ -3506,6 +3506,13 @@ call::T_ActionResult call::executeAction(char * msg, message *curmsg)
             } else {
                 ERROR("Invalid looking place: %d\n", currentAction->getLookingPlace());
             }
+            //before executing regexp, resolve [fieldN]s
+            char* x = createSendingMessage(currentAction->getMessage(), -2 /* do not add crlf*/);
+            char *str = strdup(x);
+            if (!str) {
+                ERROR("Out of memory duplicating string for assignment!");
+            }
+            currentAction->setRegExp(str);
             currentAction->executeRegExp(haystack, M_callVariableTable);
 
             if( (!(M_callVariableTable->getVar(currentAction->getVarId())->isSet())) && (currentAction->getCheckIt() == true) ) {
